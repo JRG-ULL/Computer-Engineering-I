@@ -2,40 +2,34 @@
  * Universidad de La Laguna
  * Escuela Superior de Ingeniería y Tecnología
  * Grado en Ingeniería Informática
- * Informática Básica
- * 
+ * Informática Básica 2023-2024
+ *
  * @author  Javier Rodríguez González (alu0101563428@ull.edu.es)
- * @date    20 Sep. 2023
- * @brief   This program takes a letter as an input. Said letter can be either uppercase
- *          or lowercase. Depending on the input, the program will return said letter in
- *          in uppercase (were the input to be lowercase) or lowercase (were the input to
- *          be lowercase).
+ * @date    21 Sep. 2023
+ * @brief   This program takes a letter given by the user as input and
+ *          returs the same letter in lowercase or uppercase, depending
+ *          on how the input was given. If the user inputs a lowercase
+ *          letter, the program will return an uppercase letter, and vice
+ *          versa.
  * @bug     There are no known bugs.
  * @see     https://jutge.org/problems/P98960_en
-*/
+ */
 
 /**
- * ! Deprecated method (IB-specific): After learning new algorithms and methods in the first
- * ! year's second four-month period, AyED, this program can be further simplified using a
- * ! ternary operator. 
+ * #include <iostream>
  *
- * * #include <iostream>
- * * int main()
- * * {
- * *   char input;
- * *   while (std::cin >> input)
- * *   {
- * *     if (islower(input))
- * *     {
- * *       std::cout << static_cast<char>(toupper(input)) << std::endl;
- * *     }
- * *     else
- * *     {
- * *       std::cout << static_cast<char>(tolower(input)) << std::endl;
- * *     }
- * *   }
- * *   return 0;
- * * }
+ * int main() {
+ *   char letter;
+ *   while (std::cin >> letter) {
+ *     if (islower(letter)) {
+ *       std::cout << static_cast<char>(toupper(letter)) << std::endl;
+ *     }
+ *     else {
+ *       std::cout << static_cast<char>(tolower(letter)) << std::endl;
+ *     }
+ *   }
+ *   return 0;
+ * }
 */
 
 #include <iostream>
@@ -46,9 +40,9 @@ int main()
   char letter;
   while (cin >> letter)
   {
-    islower(letter)
-    ? cout << static_cast<char>(toupper(letter)) << endl
-    : cout << static_cast<char>(tolower(letter)) << endl;
+    (islower(letter)) ?
+      cout << toupper(letter) << endl :
+      cout << tolower(letter) << endl;
   }
   return 0;
 }
