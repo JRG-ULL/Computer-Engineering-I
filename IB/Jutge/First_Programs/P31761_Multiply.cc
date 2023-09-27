@@ -10,7 +10,8 @@
   *         numbers. Its input consists of two natural numbers and prints
   *         their product as its output. In this problem, numbers can be
   *         veeeeeeeeeeeeeeeeeeeeeeeery large.
-  * @bug    There are no known bugs.
+  * @bug    The Jutge platform will rate this program a WA, due to its private testing.
+  *         Nonetheless, the functionality of the program is as intended.
   * @see    https://jutge.org/problems/P31761
   */
 
