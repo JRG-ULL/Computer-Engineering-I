@@ -4,7 +4,7 @@
  * Grado de Ingeniería Informática
  * Informática Básica 2023-2024
  *
- * @author  Javier Rodríguez González
+ * @author  Javier Rodríguez González (alu101563428@ull.edu.es)
  * @date    25 Sep. 2023
  * @brief   This program takes two numbers given by the user as its input, num1
  *          and num2, and prints out their sum in a separate line. Do note that
