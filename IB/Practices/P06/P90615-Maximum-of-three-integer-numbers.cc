@@ -15,26 +15,25 @@
  */
 
 #include <iostream>
-using namespace std;
 
 int main()
 {
   int num1;
   int num2;
   int num3;
-  while (cin >> num1 >> num2 >> num3)
+  while (std::cin >> num1 >> num2 >> num3)
   {
     if (num1 >= num2 && num1 >= num3)
     {
-      cout << num1 << endl;
+      std::cout << num1 << std::endl;
     }
     else if (num2 >= num1 && num2 >= num3)
     {
-      cout << num2 << endl;
+      std::cout << num2 << std::endl;
     }
     else if (num3 >= num1 && num3 >= num2)
     {
-      cout << num3 << endl;
+      std::cout << num3 << std::endl;
     }
   }
   return 0;

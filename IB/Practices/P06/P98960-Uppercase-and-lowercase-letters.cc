@@ -33,16 +33,15 @@
 */
 
 #include <iostream>
-using namespace std;
 
 int main()
 {
   char letter;
-  while (cin >> letter)
+  while (std::cin >> letter)
   {
     (islower(letter)) ?
-      cout << toupper(letter) << endl :
-      cout << tolower(letter) << endl;
+      std::cout << toupper(letter) << std::endl :
+      std::cout << tolower(letter) << std::endl;
   }
   return 0;
 }
