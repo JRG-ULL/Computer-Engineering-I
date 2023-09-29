@@ -24,15 +24,33 @@ int main()
   int sum{0};
   while (std::cin >> num)
   {
-    for (int i = 0; i < num; i++)
+    if (num == 0)
     {
-      std::cout << sum << " ";
-      sum = fibonacci + aux;
-      fibonacci = aux;
-      aux = sum;
+      std::cout << " ";
+    }
+    else if (num == 1)
+    {
+      std::cout << fibonacci;
+    }
+    else if (num == 2)
+    {
+      std::cout << fibonacci << " " << aux;
+    }
+    else
+    {
+      std::cout << fibonacci << " " << aux << " ";
+      for (int i = 2; i < num; i++)
+      {
+        sum = fibonacci + aux;
+        std::cout << sum << " ";
+        fibonacci = aux;
+        aux = sum;
+      }
     }
     std::cout << std::endl;
+    fibonacci = 0;
+    aux = 1;
+    sum = 0;
   }
   return 0;
 }
-
