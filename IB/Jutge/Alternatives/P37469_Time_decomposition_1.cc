@@ -18,15 +18,10 @@
 
 int main()
 {
-  int hour;
-  int min;
   int sec;
   while (std::cin >> sec)
   {
-    hour = sec / 3600;
-    min = (sec % 3600) / 60;
-    sec = (sec % 60) % 60;
-    std::cout << hour << " " << min << " " << sec << std::endl;
+    std::cout << sec / 3600 << " " << (sec % 60) % 60 << " " << (sec % 60) % 60 << std::endl;
   }
   return 0;
 }
