@@ -33,7 +33,7 @@ int main ()
         num /= 16;
       }
     }
-    std::cout << std::endl;
+    std::cout << "\n";
   }
   return 0;
 }
