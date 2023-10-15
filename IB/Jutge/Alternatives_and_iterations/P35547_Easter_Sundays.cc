@@ -32,10 +32,10 @@ int main()
     (calc2 + calc3 <= 9)
       ? std::cout << 22 + calc2 + calc3 << "/3\n"
       : calc2 == 29 && calc3 == 6
-      ? std::cout << "19/4\n"
-      : (calc2 == 28 && calc3 == 6) && calc1 > 10
-      ? std::cout << "18/4\n"
-      : std::cout << calc2 + calc3 - 9 << "/4\n";
+        ? std::cout << "19/4\n"
+        : (calc2 == 28 && calc3 == 6) && calc1 > 10
+          ? std::cout << "18/4\n"
+          : std::cout << calc2 + calc3 - 9 << "/4\n";
   }
   return 0;
 }
