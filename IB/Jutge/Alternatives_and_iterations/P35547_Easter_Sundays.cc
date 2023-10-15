@@ -1,4 +1,4 @@
-/**
+ /**
  * Universidad de La Laguna
  * Escuela Superior de Ingeniería y Tecnología
  * Grado en Ingeniería Informática
@@ -21,8 +21,8 @@
 int main()
 {
   int year;
-  int calc1;  /* Just for ease of use and to avoid making the most r/programminghorror post-worthy code ever, */
-  int calc2;  /* we'll store the necessary operating variables in these three variables. */
+  int calc1;  // Just for ease of use and to avoid making the most r/programminghorror post-worthy code ever,
+  int calc2;  // we'll store the necessary operating variables in these three variables.
   int calc3;
   while (std::cin >> year)
   {
