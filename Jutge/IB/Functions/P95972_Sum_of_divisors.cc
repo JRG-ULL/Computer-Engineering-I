@@ -4,11 +4,12 @@
  * Grado en Ingeniería Informática
  * Informática Básica 2023-2024
  * 
- * @file   P97156_Numbers_in_an_interval.cc
+ * @file   P95972_Sum_of_divisors.cc
  * @author Javier Rodríguez González (alu0101563428@ull.edu.es)
- * @date   11 Oct. 2023
- * @brief
- * @bug
- * @see
+ * @date   16 Oct. 2023
+ * @brief  
+ * @bug    There are no known bugs.
+ * @see    https://jutge.org/problems/P95972
  */
 
+#include <iostream>
