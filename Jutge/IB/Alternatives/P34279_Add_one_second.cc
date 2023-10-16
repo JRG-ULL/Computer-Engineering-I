@@ -95,15 +95,15 @@ int main()
     {
       hour = 0;
     }
-    (hour < 10) ?
-      cout << "0" << hour << ":" :
-      cout << hour << ":";
-    (min < 10) ?
-      cout << "0" << min << ":" :
-      cout << min << ":";
-    (sec < 10) ?
-      cout << "0" << sec  <<endl :
-      cout << sec << endl;
+    hour < 10 
+      ? cout << "0" << hour << ":"
+      : cout << hour << ":";
+    min < 10 
+      ? cout << "0" << min << ":"
+      : cout << min << ":";
+    sec < 10 
+      ? cout << "0" << sec  <<endl
+      : cout << sec << endl;
   }
   return 0;
 }

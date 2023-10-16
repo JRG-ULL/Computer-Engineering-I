@@ -22,43 +22,13 @@ int main()
   char letter;
   while (std::cin >> letter)
   {
-    if (islower(letter))
-    {
-      std::cout << "lowercase" << std::endl;
-    }
-    else
-    {
-      std::cout << "uppercase" << std::endl;
-    }
-    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' ||
-        letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U')
-    {
-    std::cout << "vowel" << std::endl;
-    }
-    else
-    {
-    std::cout << "consonant" << std::endl;
-    }
+    islower(letter)
+      ? std::cout << "lowercase\n"
+      : std::cout << "uppercase\n";
+    letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' ||
+    letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U'
+      ? std::cout << "vowel\n"
+      : std::cout << "consonant\n";
   }
   return 0;
 }
-
-/**
- * #include <iostream>
- *
- * int main()
- * {
- *   char letter;
- *   while (std::cin >> letter)
- *   {
- *     islower(letter)
- *       ? std::cout << "lowercase" << std::endl
- *       : std::cout << "uppercase" << std::endl;
- *     letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' ||
- *     letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U'
- *       ? std::cout << "vowel" << std::endl
- *       : std::cout << "consonant" << std::endl;
- *   }
- *   return 0;
- * }
- */

@@ -25,23 +25,23 @@ int main()
   {
     if (temp > 30)
     {
-      std::cout << "it's hot" << std::endl;
+      std::cout << "it's hot\n";
       if (temp >= 100)
       {
-        std::cout << "water would boil" << std::endl;
+        std::cout << "water would boil\n";
       }
     }
     else if (temp < 10)
     {
-      std::cout << "it's cold" << std::endl;
+      std::cout << "it's cold\n";
       if (temp <= 0)
       {
-        std::cout << "water would freeze" << std::endl;
+        std::cout << "water would freeze\n";
       }
     }
     else
     {
-      std::cout << "it's ok" << std::endl;
+      std::cout << "it's ok\n";
     }
   }
   return 0;
