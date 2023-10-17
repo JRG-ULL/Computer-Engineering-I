@@ -4,32 +4,26 @@
  * Grado en Ingeniería Informática
  * Informática Básica 2023-2024
  * 
- * @file    P97969_Counting_as_1.cc
+ * @file    P01_odd_or_even.cc
  * @author  Javier Rodríguez González (alu0101563428@ull.edu.es)
  * @date    17 Oct. 2023
- * @brief   
+ * @brief   This program checks if a given number is odd or even, and prints it
+ *          on screen.
  * @bug     There are no known bugs.
- * @see     https://jutge.org/problems/P97969
+ * @see    
  */
 
 #include <iostream>
-#include <string>
 
 int main()
 {
-  std::string input;
-  int count{0};
-  while (std::cin >> input)
+  int num;
+  while (std::cout << "Introduzca un número: ")
   {
-    for (int i = 0; i < input.size() - 1; i++)
-    {
-      if (i == 'a')
-      {
-        count++;
-      }
-    }
-    std::cout << count << std::endl;
-    count = 0;
+    std::cin >> num;
+    num % 2 == 0
+      ? std::cout << "Su número es par.\n"
+      : std::cout << "Su número es impar.\n";
   }
   return 0;
 }
