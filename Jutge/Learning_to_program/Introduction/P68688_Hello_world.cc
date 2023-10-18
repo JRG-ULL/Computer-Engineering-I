@@ -4,27 +4,17 @@
  * Grado en Ingeniería Informática
  * Informática Básica 2023-2024
  * 
- * @file   P81629_Minimum_change.cc
+ * @file   hello-world.cpp
  * @author Javier Rodríguez González (alu0101563428@ull.edu.es)
- * @date   18 Oct. 2023
- * @brief  
- * @bug    There are no known bugs.
- * @see    https://jutge.org/problems/P81629
+ * @date   18 Sep. 2023
+ * @brief  The program prints the message "Hello World" on screen.
+ * @see    https://jutge.org/problems/P68688
  */
 
 #include <iostream>
 
 int main()
 {
-  int euros;
-  int cents;
-  while (std::cin >> euros >> cents)
-  {
-    while (euros > 0)
-    {
-      
-    }
-  }
+  std::cout << "Hello world!\n";
   return 0;
 }
-
