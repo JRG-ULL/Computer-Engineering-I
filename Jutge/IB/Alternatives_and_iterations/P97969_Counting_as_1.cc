@@ -19,11 +19,11 @@ int main()
 {
   std::string input;
   int count{0};
-  while (std::cin >> input)
+  while (std::getline(std::cin, input))
   {
-    for (int i = 0; i < input.size() - 1; i++)
+    for (int i = 0; i < input.size(); i++)
     {
-      if (i == 'a')
+      if (input.at(i) == 'a')
       {
         count++;
       }

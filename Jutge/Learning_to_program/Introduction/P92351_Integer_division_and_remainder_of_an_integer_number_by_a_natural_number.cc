@@ -6,12 +6,10 @@
   * 
   * @author   Javier Rodríguez González (alu0101563428@ull.edu.es)
   * @date     27 Sep. 2023
-  * @brief    This program reads two natural numbers num1 and num2, with num2 > 0,
-  *           and prints the integer division and the remainder of num1 divided by
-  *           num1, separated by a space.  
-  * @bug      As it seems, Jutge will return this program a WA case, given one of its
-  *           public cases appears to be wrong (specifically speaking -32 / 6 = -6,
-  *           with a remainder of 4).
+  * @brief    This program reads two natural numbers dividend and divisor, with divisor > 0,
+  *           and prints the integer division and the remainder of dividend divided by
+  *           dividend, separated by a space.  
+  * @bug      There are no known bugs
   * @see      https://jutge.org/problems/P92351
   */
 
@@ -19,11 +17,13 @@
 
 int main()
 {
-  int num1;
-  int num2;
-  while (std::cin >> num1 >> num2)
+  int dividend;
+  int divisor;
+  while (std::cin >> dividend >> divisor)
   {
-    std::cout << num1 / num2 << " " << num1 % num2 << std::endl;
+    dividend % divisor < 0
+      ? std::cout << (dividend / divisor) - 1 << " " << (dividend % divisor) + divisor << std::endl
+      : std::cout << dividend / divisor << " " << dividend % divisor << std::endl;
   }
   return 0;
 }
