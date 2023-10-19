@@ -14,7 +14,6 @@
  */
 
 #include <iostream>
-#include <iomanip>
 
 int main()
 {
@@ -23,9 +22,9 @@ int main()
   {
     num - static_cast<int>(num) == 0.0
       ? std::cout << static_cast<long long>(num) << " " << static_cast<long long>(num) << " " << static_cast<long long>(num) << std::endl
-      : (num - static_cast<int>(num) > 0.0) && (num - static_cast<int>(num) < 0.5)
-        ? std::cout << static_cast<long long>(num - (num - static_cast<int>(num))) << " " << static_cast<long long>(num + (1 - (num - static_cast<int>(num)))) << " " << std::fixed << std::setprecision(0) << num << std::endl
-        : std::cout << static_cast<int>(num - (num - static_cast<long long>(num))) << " " << static_cast<long long>(num + (1 - (num - static_cast<long long>(num)))) << " " << static_cast<long long>(num + (1 - (num - static_cast<long long>(num)))) << std::endl;
+      : (num - static_cast<long long>(num) > 0.0) && (num - static_cast<long long>(num) < 0.5)
+        ? std::cout << static_cast<long long>(num) << " " << static_cast<long long>(num + 1) << " " << static_cast<long long>(num) << std::endl
+        : std::cout << static_cast<long long>(num) << " " << static_cast<long long>(num + 1) << " " << static_cast<long long>(num + 1) << std::endl;
   }
   return 0;
 }
