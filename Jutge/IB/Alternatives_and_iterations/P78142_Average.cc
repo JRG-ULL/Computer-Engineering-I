@@ -15,9 +15,23 @@
  * @see     https://jutge.org/problems/P78142
  */
 
+#include <iomanip>
 #include <iostream>
 #include <string>
 
 int main()
 {
-  
+  double average_num{0.0};
+  double average_den{0.0};
+  std::string input;
+  while (std::getline(std::cin, input))
+  {
+    for (int i = 0; i < input.size(); i++)
+    {
+      average_num += input.at(i);
+      average_den++;
+    }
+    std::cout << std::fixed << std::setprecision(2) << average_num / average_den << std::endl;
+  }
+  return 0;
+}
