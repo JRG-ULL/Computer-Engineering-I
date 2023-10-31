@@ -1,4 +1,9 @@
 /**
+ * Universidad de La Laguna
+ * Escuela Superior de Ingeniería y Tecnología
+ * Grado en Ingeniería Informática
+ * Informática Básica 2023-2024
+ * 
  * @file   P79817_Powers.cc
  * @author Javier Rodríguez González (alu0101563428@ull.edu.es)
  * @date   31 Oct. 2023
@@ -24,23 +29,9 @@ int main() {
   int base;
   int exponential;
   while (std::cin >> base >> exponential) {
-    switch (exponential) {
-      
+    switch (exponential) {  
       case 0:   // Any number to the power of zero is equal to one.
         std::cout << 1 << std::endl;
-        break;
-
-      case 1:   // Any number to the power of one is itself.
-        std::cout << base << std::endl;
-        break;
-
-      case 2:   // Simplified operation, not to constantly make use of our
-                // power function.
-        std::cout << base * base << std::endl;
-        break;
-
-      case 3:   // Simplified operation.
-        std::cout << base * base * base << std::endl;
         break;
 
       default:  // For any exponential higher than three.
