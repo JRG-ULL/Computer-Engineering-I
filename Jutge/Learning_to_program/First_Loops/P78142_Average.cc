@@ -13,5 +13,23 @@
  */
 
 #include <iostream>
+#include <vector>
 
+double Average(const std::vector<double>& sequence) {
+  double sum{0.0};
+  double number_of_elements{0.0};
+  for (int i = 0; i < sequence.size(); i++) {
+    sum += sequence.at(i);
+    number_of_elements++;
+  }
+  double average = sum / number_of_elements;
+  return average;
+}
 
+int main() {
+  std::vector<double> sequence;
+  while (std::cin >> sequence) {
+    Average(sequence);
+  }
+  return 0;
+}

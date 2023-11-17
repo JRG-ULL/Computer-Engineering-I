@@ -16,24 +16,27 @@
 
 #include <iostream>
 
-int main()
-{
+int main() {
   int num;
-  int fibonacci{0};
-  int aux{1};
-  int sum{0};
-  while (std::cin >> num)
-  {
-    switch (num)
-    {
+  while (std::cin >> num) {
+    int fibonacci{0};
+    int aux{1};
+    switch (num) {
       case 0:
         std::cout << " ";
+        break;
+
       case 1:
-      std::cout << fibonacci;
+        std::cout << fibonacci;
+        break;
+
       case 2:
-      std::cout << fibonacci << " " << aux;
+        std::cout << fibonacci << " " << aux;
+        break;
+
       default:
         std::cout << fibonacci << " " << aux << " ";
+        int sum{0};
         for (int i = 2; i < num; i++)
         {
           sum = fibonacci + aux;
@@ -41,11 +44,9 @@ int main()
           fibonacci = aux;
           aux = sum;
         }
+        break;
     }
     std::cout << std::endl;
-    fibonacci = 0;
-    aux = 1;
-    sum = 0;
   }
   return 0;
 }

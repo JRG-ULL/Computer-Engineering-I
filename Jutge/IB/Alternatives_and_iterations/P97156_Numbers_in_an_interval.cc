@@ -14,20 +14,14 @@
 
 #include <iostream>
 
-int main()
-{
+int main() {
   int num1;
   int num2;
-  while (std::cin >> num1 >> num2)
-  {
-    if (num1 > num2)
-    {
+  while (std::cin >> num1 >> num2) {
+    if (num1 > num2) {
       std::cout << std::endl;
-    }
-    else
-    {
-      for (int i = num1; i < num2; i++)
-        {
+    } else {
+      for (int i = num1; i < num2; i++) {
           std::cout << i << ",";
         }
       std::cout << num2 << std::endl;

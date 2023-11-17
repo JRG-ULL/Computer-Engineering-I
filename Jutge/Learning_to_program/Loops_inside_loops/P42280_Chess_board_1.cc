@@ -14,8 +14,7 @@
 
 #include <iostream>
 
-int Chess(const std::string& coins) {
-  int chess_sum{0};
+int Chess(const std::string& coins, int chess_sum) {
   for (int i = 0; i < coins.size(); i++) {
      chess_sum += coins.at(i);
   }
@@ -27,10 +26,12 @@ int main() {
   int columns;
   while (std::cin >> rows >> columns) {
     std::string coins;
+    int chess_sum{0};
     for (int size = 0; size < rows; size++) {
       std::cin >> coins;
     }
-    std::cout << Chess(coins) << std::endl;
+    std::cout << Chess(coins, chess_sum) << std::endl;
+    chess_sum = 0;
   }
   return 0;
 }
