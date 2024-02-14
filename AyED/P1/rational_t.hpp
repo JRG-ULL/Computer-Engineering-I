@@ -1,61 +1,66 @@
-// AUTOR: 
-// FECHA: 
-// EMAIL: 
+// AUTOR: Rodríguez González, Javier
+// FECHA: 8 Feb. 2024
+// EMAIL: alu0101563428@ull.edu.es
 // VERSION: 1.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 1
 // COMENTARIOS: se indican entre [] las pautas de estilo aplicadas de
 //              "C++ Programming Style Guidelines"
-//              https://geosoft.no/development/cppstyle.html
+//              https://google.github.io/styleguide/cppguide.html
 
-// pauta de estilo [92]: comentarios multilínea usando solo "//"
+// Comment Style: Use either the // or /* */ syntax, as long as you are consistent.
 
 #pragma once
 
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include <algorithm>  // Solo empleado para el método de simplificación.
 
-// pauta de estilo [5]
-# define EPSILON 1e-6
+// Constant Names: Variables declared constexpr or const, and whose value is fixed for the duration of the program, are named with a leading "k" followed by mixed case.
+# define kEpsilon 1e-6
 
 using namespace std;
 
 class rational_t
 {
-  // pautas de estilos [44] y [73]: primero "public" y después "private"
+  // Declaration Order: A class definition should usually start with a public: section, followed by protected:, then private:.
 public:
-  rational_t(const int = 0, const int = 1);
-  ~rational_t() {}
+  rational_t(const int = 0, const int = 1);   // Constructor de la clase (por parámetros y por defecto).
+  ~rational_t() {}                            // Destructor por defecto de la clase.
   
-  // pauta de estilo [71]: indentación a 2 espacios
+  // Spaces vs. Tabs: Use only spaces, and indent 2 spaces at a time.
   // getters
-  int get_num() const;
-  int get_den() const;
+  int get_num() const;        // Método de acceso al numerador.
+  int get_den() const;        // Método de acceso al denominador.
   
   // setters
-  void set_num(const int);
-  void set_den(const int);
+  void set_num(const int);    // Método de modificación o establecimiento del numerador.
+  void set_den(const int);    // Método de modificación o establecimiento del denominador.
 
   double value(void) const;
 
-  // FASE II
-  bool is_equal(const rational_t&, const double precision = EPSILON) const;
-  bool is_greater(const rational_t&, const double precision = EPSILON) const;
-  bool is_less(const rational_t&, const double precision = EPSILON) const;
-  
-  // FASE III
-  rational_t add(const rational_t&);
-  rational_t substract(const rational_t&);
-  rational_t multiply(const rational_t&);
-  rational_t divide(const rational_t&);
-  rational_t square();
-  rational_t cube();
+  // FASE II: Comparadores
+  bool is_equal(const rational_t&, const double precision = kEpsilon) const;    // Comparador de igualdad.
+  bool is_greater(const rational_t&, const double precision = kEpsilon) const;  // Comparador de superioridad.
+  bool is_less(const rational_t&, const double precision = kEpsilon) const;     // Comparador de inferioridad.
+  bool is_zero(const double precision = kEpsilon) const;                        // Comprobador de cero.
+  bool is_int() const;                                                          // Comprobador de entero.
+
+  // FASE III: Operadores
+  rational_t add(const rational_t&);        // Operador suma.
+  rational_t substract(const rational_t&);  // Operador resta.
+  rational_t multiply(const rational_t&);   // Operador multiplicación.
+  rational_t divide(const rational_t&);     // Operador división.
+  rational_t square();                      // Operador cuadrado.
+  rational_t cube();                        // Operador cubo.
+  rational_t inverse();                     // Operador inverso.
+  rational_t simplify();                    // Operador simplificación.
   
   void write(ostream& = cout) const;
   void read(istream& = cin);
   
 private:
-  // pauta de estilo [11]: nombre de los atributos seguido de "_"
+  // Class Data Members: Data members of classes, both static and non-static, are named like ordinary nonmember variables, but with a trailing underscore.
   int num_, den_;
 };

@@ -1,14 +1,14 @@
 // AUTOR: Rodríguez González, Javier
-// FECHA: 8 feb. 2024
+// FECHA: 8 Feb. 2024
 // EMAIL: alu0101563428@ull.edu.es
 // VERSION: 1.0
 // ASIGNATURA: Algoritmos y Estructuras de Datos
 // PRÁCTICA Nº: 1
 // COMENTARIOS: se indican entre [] las pautas de estilo aplicadas de
 //              "C++ Programming Style Guidelines"
-//              https://geosoft.no/development/cppstyle.html
+//              https://google.github.io/styleguide/cppguide.html
 
-// pauta de estilo [92]: comentarios multilínea usando solo "//"
+// Comment Style: Use either the // or /* */ syntax, as long as you are consistent.
 
 #include "rational_t.hpp"
 
@@ -17,9 +17,9 @@ rational_t::rational_t(const int n, const int d) {
   num_ = n, den_ = d;
 }
 
-// pauta de estilo [87]: 3 líneas de separación entre métodos
+// Vertical Whitespace: Blank lines may help readability by visually separating the load-bearing content from the organizational wrapper.
 
-// pauta de estilo [83]: tipo retornado en línea anterior al método
+// Function Declarations and Definitions: Return type on the same line as function name, parameters on the same line if they fit.
 int rational_t::get_num() const {
   return num_;
 }
@@ -43,16 +43,32 @@ double rational_t::value() const {
 
 
 // FASE II: Comparaciones
+
+// Comparador de igualdad
 bool rational_t::is_equal(const rational_t& r, const double precision) const { 
   return fabs(value() - r.value()) < precision;
 }
-
+ 
+// Comparador de superioridad
 bool rational_t::is_greater(const rational_t& r, const double precision) const {
-  return (value() - r.value()) > precision;
+  return value() - r.value() > precision;
 }
 
+// Comparador de inferioridad
 bool rational_t::is_less(const rational_t& r, const double precision) const {
-  return (value() - r.value()) < precision;
+  return r.value() - value() > precision;
+  // return value() - r.value() < -precision;
+}
+
+// Comprobador de cero
+bool rational_t::is_zero(const double precision) const {
+  return fabs(value()) < precision;
+  // return get_num == 0;
+}
+
+// Comprobador de entero
+bool rational_t::is_int() const {
+  return get_num() % get_den() == 0;
 }
 
 
@@ -88,6 +104,15 @@ rational_t rational_t::cube() {
   return rational_t(get_num() * get_num() * get_num(), get_den() * get_den() * get_den());
 }
 
+// Operador Inverso
+rational_t rational_t::inverse() {
+  return rational_t(get_den(), get_num());
+}
+
+// Operador simplificación
+rational_t rational_t::simplify() {
+  return rational_t(get_num() / __gcd(get_num(), get_den()), get_den() / __gcd(get_num(), get_den()));
+}
 
 // E/S
 void rational_t::write(ostream& os) const {
