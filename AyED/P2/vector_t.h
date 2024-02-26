@@ -12,6 +12,7 @@
 
 #include <cassert>
 #include <iostream>
+#include "rational_t.h"
 
 using namespace std;
 

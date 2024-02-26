@@ -11,7 +11,7 @@
 // Comment Style: Use either the // or /* */ syntax, as long as you are
 // consistent.
 
-#include "rational_t.hpp"
+#include "rational_t.h"
 
 rational_t::rational_t(const int n, const int d) {
   assert(d != 0);
@@ -79,13 +79,13 @@ rational_t rational_t::divide(const rational_t& r) const {
 
 // FASE I: operadores
 rational_t operator+(const rational_t& a, const rational_t& b) {
-  return rational_t(a.get_num() * b.get_den() + a.get_den() + b.get_num(),
-          a.get_den() * b.get_den());
+  return rational_t(a.get_num() * b.get_den() + a.get_den() * b.get_num(),
+                    a.get_den() * b.get_den());
 }
 
 rational_t operator-(const rational_t& a, const rational_t& b) {
-  return rational_t(a.get_num() * b.get_den() - a.get_den() + b.get_num(),
-          a.get_den() * b.get_den());
+  return rational_t(a.get_num() * b.get_den() - a.get_den() * b.get_num(),
+                    a.get_den() * b.get_den());
 }
 
 rational_t operator*(const rational_t& a, const rational_t& b) {

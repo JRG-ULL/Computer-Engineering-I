@@ -15,12 +15,12 @@
 #include <iostream>
 
 // pauta de estilo [41]: ficheros de cabecera agrupados y separados
-#include "matrix_t.hpp"
-#include "rational_t.hpp"
-#include "vector_t.hpp"
+#include "matrix_t.h"
+#include "rational_t.h"
+#include "vector_t.h"
 
 int main() {
-  rational_t a(1, 2), b(3);
+  rational_t a(1, 2), b(3, 1);
 
   // FASE I
   std::cout << "a + b: ";
@@ -46,7 +46,8 @@ int main() {
             << std::endl
             << std::endl;
 
-  vector_t<rational_t> x, y;
+  vector_t<rational_t> x;
+  vector_t<rational_t> y;
   x.read(), x.write();
   y.read(), y.write();
 
@@ -55,13 +56,20 @@ int main() {
             << std::endl;
 
   // FASE III
-  matrix_t<double> A, B, C;
+  matrix_t<double> A;
+  matrix_t<double> B;
+  matrix_t<double> C;
+  matrix_t<double> D;
   A.read(), A.write();
   B.read(), B.write();
 
   C.multiply(A, B);
   std::cout << "Multiplicación de matrices A y B: " << std::endl;
   C.write();
+
+  D.transposed(A);
+  std::cout << "Matriz traspuesta A: " << std::endl;
+  D.write();
 
   return 0;
 }
