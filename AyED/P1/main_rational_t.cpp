@@ -9,12 +9,15 @@
 //              https://google.github.io/styleguide/cppguide.html
 // COMPILACIÓN: g++ -g rational_t.cpp main_rational_t.cpp -o main_rational_t
 
-// Comment Style: Use either the // or /* */ syntax, as long as you are consistent.
+// Comment Style: Use either the // or /* */ syntax, as long as you are
+// consistent.
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
-// Names and Order of Includes: Include headers in the following order: Related header, C system headers, C++ standard library headers, otherlibraries' headers, your project's headers.
+// Names and Order of Includes: Include headers in the following order: Related
+// header, C system headers, C++ standard library headers, otherlibraries'
+// headers, your project's headers.
 #include "rational_t.hpp"
 
 int main() {
@@ -49,16 +52,16 @@ int main() {
   std::cout << "c int? " << (c.is_int() ? "true" : "false") << std::endl;
 
   // FASE III: Operaciones
-  std::cout << "\n\n[FASE III] - Operaciones" << std::endl; 
+  std::cout << "\n\n[FASE III] - Operaciones" << std::endl;
   std::cout << "a + b: ";
   a.add(b).write();
-  
+
   std::cout << "b - a: ";
   b.substract(a).write();
 
   cout << "a * b: ";
   a.multiply(b).write();
-  
+
   std::cout << "a / b: ";
   a.divide(b).write();
 
