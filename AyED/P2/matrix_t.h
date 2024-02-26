@@ -39,7 +39,6 @@ class matrix_t {
 
   // operaciones y operadores
   void multiply(const matrix_t<T>&, const matrix_t<T>&);
-  void transposed(const matrix_t<T>&);
 
   void write(ostream& = cout) const;
   void read(istream& = cin);
