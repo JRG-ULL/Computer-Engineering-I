@@ -83,14 +83,28 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 // Evaluación de un polinomio representado por vector denso
 double Polynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for (int i = 0; i < get_size(); ++i) {
+    // Sumamos al resultado el coeficiente en 'i' multiplicado por x elevado al
+    // índice en 'i'.
+    result += at(i) * pow(x, i);
+  }
   return result;
 }
 
 // Comparación si son iguales dos polinomios representados por vectores densos
 bool Polynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  // Empleamos el tamaño del vector más pequeño para comparar.
+  int minimal_size =
+      (get_size() - pol.get_size() < eps) ? get_size() : pol.get_size();
+  // Comprobamos cada coeficiente.
+  for (int i = 0; i < minimal_size; ++i) {
+    // Si la diferencia absoluta entre dos coeficientes es mayor que la
+    // precisión, entonces no son iguales.
+    if (fabs(at(i) - pol.at(i)) > eps) {
+      differents = true;
+    }
+  }
   return !differents;
 }
 
@@ -125,7 +139,11 @@ std::ostream& operator<<(std::ostream& os, const SparsePolynomial& p) {
 // Evaluación de un polinomio representado por vector disperso
 double SparsePolynomial::Eval(const double x) const {
   double result{0.0};
-  // poner el código aquí
+  for (int i = 0; i < get_nz(); ++i) {
+    // Sumamos al resultado el coeficiente en 'i' multiplicado por x elevado al
+    // índice en 'i'.
+    result += at(i).get_val() * pow(x, at(i).get_inx());
+  }
   return result;
 }
 
@@ -134,7 +152,23 @@ double SparsePolynomial::Eval(const double x) const {
 bool SparsePolynomial::IsEqual(const SparsePolynomial& spol,
                                const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  // Al tratarse de vectores dispersos, debemos comprobar el tamaño de ambos
+  // vectores antes de comenzar la evaluación de cada coeficiente.
+  if (get_nz() != spol.get_nz()) {
+    differents = true;
+  }
+  // El uso de la variable 'minimal_size' es meramente para evitar una excepción
+  // de programación.
+  int minimal_size =
+      (get_nz() - spol.get_nz() < eps) ? get_nz() : spol.get_nz();
+  // Comprobamos cada coeficiente.
+  for (int i = 0; i < minimal_size; ++i) {
+    // Si la diferencia absoluta entre los coeficientes es mayor a la precisión
+    // establecida, entonces no son iguales.
+    if (fabs(at(i).get_val() - spol.at(i).get_val()) > eps) {
+      differents = true;
+    }
+  }
   return !differents;
 }
 
@@ -142,7 +176,17 @@ bool SparsePolynomial::IsEqual(const SparsePolynomial& spol,
 // vector disperso y vector denso
 bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   bool differents = false;
-  // poner el código aquí
+  // Empleamos el tamaño del vector más pequeño para comparar.
+  int minimal_size =
+      (get_nz() - pol.get_size() < eps) ? get_nz() : pol.get_size();
+  // Comprobamos cada coeficiente.
+  for (int i = 0; i < minimal_size; ++i) {
+    // Si la diferencia absoluta entre los coeficientes es mayor a la precisión
+    // establecida, entonces no son iguales.
+    if (fabs(at(i).get_val() - pol.at(at(i).get_inx())) > eps) {
+      differents = true;
+    }
+  }
   return !differents;
 }
 

@@ -69,7 +69,21 @@ sparse_vector_t::sparse_vector_t(const int n) : pv_(n), nz_(0), n_(n) {}
 // FASE II
 sparse_vector_t::sparse_vector_t(const vector_t<double>& v, const double eps)
     : pv_(), nz_(0), n_(0) {
-  // poner el código aquí
+  n_ = v.get_size();  // Obtenemos el tamaño del vector original.
+  for (int i = 0; i < n_; ++i) {
+    if (IsNotZero(v.at(i), eps)) {
+      ++nz_;  // Contabilizamos el número de elementos no nulos.
+    }
+  }
+  pv_.resize(nz_);  // Obtenemos el tamaño del nuevo vector (número de elementos
+                    // no nulos del vector original).
+  for (int i = 0, k = 0; i < n_; ++i) {
+    if (IsNotZero(v.at(i), eps)) {
+      // Creamos un par (valor, índice) y lo asignamos al vector pv_.
+      pv_.at(k) = pair_double_t(v.get_val(i), i);
+      ++k;
+    }
+  }
 }
 
 // constructor de copia
@@ -95,6 +109,8 @@ inline int sparse_vector_t::get_nz() const { return nz_; }
 // Método de devolución del tamaño original del vector.
 inline int sparse_vector_t::get_n() const { return n_; }
 
+// Método de devolución de referencia al par (valor, índice) en la posición
+// dada.
 pair_double_t& sparse_vector_t::at(const int i) {
   assert(i >= 0 && i < get_nz());
   return pv_[i];
@@ -103,11 +119,13 @@ pair_double_t& sparse_vector_t::at(const int i) {
 // Operador de indexación.
 pair_double_t& sparse_vector_t::operator[](const int i) { return at(i); }
 
+// Versión constante del método 'at'.
 const pair_double_t& sparse_vector_t::at(const int i) const {
   assert(i >= 0 && i < get_nz());
   return pv_[i];
 }
 
+// Versión constante del operador de indexación.
 const pair_double_t& sparse_vector_t::operator[](const int i) const {
   return at(i);
 }
@@ -119,6 +137,7 @@ void sparse_vector_t::write(std::ostream& os) const {
   os << "]" << std::endl;
 }
 
+// Sobrecarga del operador de impresión por pantalla (flujo de salida).
 std::ostream& operator<<(std::ostream& os, const sparse_vector_t& sv) {
   sv.write(os);
   return os;
