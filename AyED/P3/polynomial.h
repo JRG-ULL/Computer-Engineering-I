@@ -55,6 +55,11 @@ class SparsePolynomial : public sparse_vector_t {
   double Eval(const double) const;
   bool IsEqual(const SparsePolynomial&, const double = kEpsilon) const;
   bool IsEqual(const Polynomial&, const double = kEpsilon) const;
+
+  // MODIFICACIONES
+  // void PrintHigher(const double) const;
+  // void PrintOdd() const;
+  // void PrintEven() const;
 };
 
 // E/S
@@ -189,5 +194,33 @@ bool SparsePolynomial::IsEqual(const Polynomial& pol, const double eps) const {
   }
   return !differents;
 }
+
+// MODIFICACIONES
+// void SparsePolynomial::PrintOdd() const {
+//   std::cout << "Monomios con exponentes impares:" << std::endl;
+//   for (int i = 0; i < get_nz(); ++i) {
+//     if (at(i).get_inx() % 2 != 0) {
+//       std::cout << at(i).get_val() << std::endl;
+//     }
+//   }
+// }
+
+// void SparsePolynomial::PrintEven() const {
+//   std::cout << "Monomios con exponentes pares:" << std::endl;
+//   for (int i = 0; i < get_nz(); ++i) {
+//     if (at(i).get_inx() % 2 == 0) {
+//       std::cout << at(i).get_val() << std::endl;
+//     }
+//   }
+// }
+
+// void SparsePolynomial::PrintHigher(const double coeficient) const {
+//   std::cout << "Coeficientes mayores a " << coeficient << std::endl;
+//   for (int i = 0; i < get_nz(); ++i) {
+//     if (at(i).get_val() > coeficient) {
+//       std::cout << at(i).get_val() << std::endl;
+//     }
+//   }
+// }
 
 #endif  // POLYNOMIAL_H_
