@@ -2,7 +2,7 @@
 # FECHA:        29 feb. 2024
 # E-MAIL:       alu0101563428@ull.edu.es
 
-# CÓDIGO EN C++
+ CÓDIGO EN C++
 # ---------------------
 # #include<iostream>
 # int main(void) {

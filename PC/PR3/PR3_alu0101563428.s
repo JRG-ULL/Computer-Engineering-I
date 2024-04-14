@@ -1,6 +1,11 @@
 # AUTOR: Rodríguez González, Javier 
 # E-MAIL: alu0101563428@ull.edu.es
-# FECHA ÚLTIMA MODIFICACIÓN: 9 abr. 2024
+# FECHA ÚLTIMA MODIFICACIÓN: 14 abr. 2024
+
+# ÚLTIMAS MODIFICACIONES
+# ---------------------
+# - Añadidos comentarios aclarativos sobre las funciones.
+# - Solucionado error de carga de valores encontrado en la función 'intercambia'.
 
 # CÓDIGO EN C++
 # ---------------------
@@ -159,16 +164,14 @@
 #         }
 #         break;
 #
-#       // Opción 3  y  4
+#       // Opción 3
 #       case 3:
-#       case 4:
 #         std::cout << "\nIndice de fila: ";
 #         int indFil;
 #         std::cin >> indFil;
 #         if ((indFil < 0) || (indFil >= matTrabajo->nFil)) {
 #           std::cerr
 #               << "Error: dimension incorrecta.  Numero de fila incorrecto\n";
-#           continue;  // volvemos al principio del bucle
 #         }
 #         std::cout << "Indice de columna: ";
 #         int indCol;
@@ -176,18 +179,30 @@
 #         if ((indCol < 0) || (indCol >= matTrabajo->nCol)) {
 #           std::cerr
 #               << "Error: dimension incorrecta.  Numero de columna incorrecto\n";
-#           continue;  // volvemos al principio del bucle
 #         }
+#         std::cout << "Nuevo valor para el elemento: ";
+#         float valor;
+#         std::cin >> valor;
+#         change_elto(matTrabajo, indFil, indCol, valor);
+#         break;
 #
-#         if (opcion == 3) {
-#           std::cout << "Nuevo valor para el elemento: ";
-#           float valor;
-#           std::cin >> valor;
-#           change_elto(matTrabajo, indFil, indCol, valor);
+#       // Opción 4
+#       case 4:
+#         std::cout << "\nIndice de fila: ";
+#         int indFil;
+#         std::cin >> indFil;
+#         if ((indFil < 0) || (indFil >= matTrabajo->nFil)) {
+#           std::cerr
+#               << "Error: dimension incorrecta.  Numero de fila incorrecto\n";
 #         }
-#         if (opcion == 4) {
-#           intercambia(matTrabajo, indFil, indCol);
+#         std::cout << "Indice de columna: ";
+#         int indCol;
+#         std::cin >> indCol;
+#         if ((indCol < 0) || (indCol >= matTrabajo->nCol)) {
+#           std::cerr
+#               << "Error: dimension incorrecta.  Numero de columna incorrecto\n";
 #         }
+#         intercambia(matTrabajo, indFil, indCol);
 #         break;
 #
 #       // Opción 7
@@ -207,10 +222,8 @@
 #   }
 # }
 
-# TABLA DE REGISTROS SALVADOS
+# DEFINICIONES DEL PROGRAMA
 # ---------------------
-# mat
-
 #typedef struct {
 #  int nFil;
 nFil = 0	# El desplazamiento al campo dentro de la estructura
@@ -284,15 +297,51 @@ str_conValor:	.asciiz	") con valor "
 str_matTiene:	.asciiz	"\n\nLa matriz tiene dimension "
 
 	.text
-# FUNCIÓN I: print_mat (imprimir matriz)
+# FUNCIÓN I: print_mat
 # ---------------------
-# int f				= $t0
-# int c				= $t1
-# Dirección de elem[]		= $t2
-# Tamaño de elemento		= $t7
-# elem[f * nCol + c]		= $f12
+# Función que imprime por pantalla la matriz actual de trabajo elemento por elemento,
+# haciendo uso de dos bucles 'for' anidados.
+
+# ARGUMENTOS Y VALORES DE RETORNO
+# ---------------------
+# Matriz de trabajo (matT)	= $a0
+
+# TABLA DE REGISTROS
+# ---------------------
+# Copia de matT			= $s0
+# nFil				= $s1
+# nCol				= $s2
+# int f				= $s3
+# int c				= $s4
+# Dirección de elem[]		= $t0
+# float* elem			= $f12
 
 print_mat:
+	# Reservamos espacio en la pila y guardamos valores:
+	addi	$sp, $sp, -24
+	# Return address:
+	sw	$ra, 0($sp)
+	# matT (copia de $a0):
+	sw	$s0, 4($sp)
+	# nFil:
+	sw	$s1, 8($sp)
+	# nCol:
+	sw	$s2, 12($sp)
+	# int f (variable iterativa):
+	sw	$s3, 16($sp)
+	# int c (variable iterativa):
+	sw	$s4, 20($sp)
+
+	# Cargamos los valores a utilizar:
+	# matT
+	move	$s0, $a0
+	# nFil
+	lw	$s1, nFil($a0)
+	# nCol
+	lw	$s2, nCol($a0) 
+	
+	# INICIO
+	# ---------------------
 	# void print_mat(structMat* mat) {
 	# std::cout << "\n\nLa matriz tiene dimension "
 	li	$v0, 4
@@ -316,29 +365,27 @@ print_mat:
 	syscall
 
 	# Excepción matriz 0x0:
-	beqz $s1, exception
-	beqz $s2, exception
+	beqz $s1, exception_print
+	beqz $s2, exception_print
 
-	# Guardamos el tamaño de elemento en $t7.
-	li	$t7, sizeF
 	# int f = 0
-	move	$t0, $zero
-	# for (int f = 0; f < nFil; f++) {
-	bfor_f:
+	move	$s3, $zero
+	# for (int f = 0; f < nFil; ++f) {
+	bfor_print_f:
 		# int c = 0
-		move	$t1, $zero
-		# for (int c = 0; c < nCol; c++) {
-		bfor_c:
+		move	$s4, $zero
+		# for (int c = 0; c < nCol; ++c) {
+		bfor_print_c:
 			# f * nCol
-			mul	$t2, $t0, $s2
+			mul	$t0, $s3, $s2
 			# (f * nCol) + c
-			addu	$t2, $t2, $t1
+			addu	$t0, $t0, $s4
 			# (f * nCol + c) * sizeF
-			mul	$t2, $t2, $t7
+			mul	$t0, $t0, sizeF
 			# Dirección de elem[f * nCol + c]
-			addu	$t2, $t2, $s0
+			addu	$t0, $t0, $s0
 			# elem[f * nCol + c]
-			lwc1	$f12, elementos($t2)
+			lwc1	$f12, elementos($t0)
 
 			# std::cout << elem[f * nCol + c]
 			li 	$v0, 2
@@ -348,57 +395,285 @@ print_mat:
 			la	$a0, 32
 			syscall
 
-			# c++
-			addi	$t1, $t1, 1
-			# Comprobamos 'c < nCol' para continuar en el bucle 'for' (bfor_c).
-			blt	$t1, $s2, bfor_c
+			# ++c
+			addi	$s4, $s4, 1
+			# Comprobamos 'c < nCol' para continuar en el bucle 'for' (bfor_print_c).
+			blt	$s4, $s2, bfor_print_c
 		# }
 		# std::cout << '\n';
 		li	$v0, 11
 		la	$a0, LF
 		syscall
 
-		# f++
-		addi	$t0, $t0, 1
-		# Comprobamos 'f < nFil' para continuar en el bucle 'for' (bfor_f).
-		blt	$t0, $s1, bfor_f
+		# ++f
+		addi	$s3, $s3, 1
+		# Comprobamos 'f < nFil' para continuar en el bucle 'for' (bfor_print_f).
+		blt	$s3, $s1, bfor_print_f
 	# }
 	# std::cout << '\n';
 	li	$v0, 11
 	la	$a0, LF
 	syscall
-	# }
 	
-	exception:
-	jr	$ra
+	# La etiqueta 'exception' es exclusiva para el uso de la matriz vacía (0x0).
+	exception_print:
+	# Restauramos valores y liberamos espacio en la pila:
+	lw	$s4, 20($sp)
+	lw	$s3, 16($sp)
+	lw	$s2, 12($sp)
+	lw	$s1, 8($sp)
+	lw	$s0, 4($sp)
+	lw	$ra, 0($sp)
+	addi	$sp, $sp, 24
 
+	# }
+	jr	$ra
 print_mat_fin:
 
-# FUNCIÓN II: change_elto (cambiar elemento)
+# FUNCIÓN II: change_elto
+# ---------------------
+# Función que cambia un valor de la matriz elegido por el usuario a través de los índices
+# de fila y columna del elemento a cambiar. El usuario asigna el nuevo valor del elemento.
+
+# ARGUMENTOS Y REGISTROS DE RETORNO
+# ---------------------
+# structMat* mat	= $a0
+# int indF		= $a1
+# int indC		= $a2
+
+# TABLA DE REGISTROS
+# ---------------------
+# int numCol				= $t0
+# mat->elementos[indF * numCol + indC]	= $t1
+
 change_elto:
+	# void change_elto(structMat* mat, int indF, int indC, float valor) {
+	# int numCol = mat->nCol;
+	lw	$t0, nCol($a0)
+
+	# indF * numCol
+	mul	$t1, $a1, $t0
+	# (indF * numCol) + indC
+	addu	$t1, $t1, $a2
+	# (indF * numCol + indC) * sizeF
+	mul	$t1, $t1, sizeF
+	# Dirección de elementos[indF * numCol + indC]
+	addu	$t1, $t1, $a0
+
+	# mat->elementos[indF * numCol + indC] = valor;
+	swc1	$f12, elementos($t1)
+	
+	# }
 	jr	$ra
 change_elto_fin:
 
-# FUNCIÓN III: swap (intercambio)
+# FUNCIÓN III: swap
+# ---------------------
+# Función encargada del intercambio de valores entre registros. Esta función
+# es únicamente empleada cuando se requiere cambiar valores entre registros
+# sin la intervención del usuario, es decir, sin que el usuario elija el nuevo
+# valor.
+
+# ARGUMENTOS Y REGISTROS DE RETORNO
+# ---------------------
+# float* e1	= $a0
+# float* e2	= $a1
+
+# TABLA DE REGISTROS
+# ---------------------
+# float temp1	= $f16
+# float temp2	= $f17
+
 swap:
+	# void swap(float* e1, float* e2) {
+	# float temp1 = *e1;
+	lwc1	$f16, 0($a0)
+	# float temp2 = *e2;
+	lwc1	$f17, 0($a1)
+	# *e1 = temp2;
+	swc1	$f16, 0($a1)
+	# *e2 = temp1;
+	swc1	$f17, 0($a0)
+	# }
 	jr	$ra
 swap_fin:
 
-# FUNCIÓN IV: intercambia (intercambio de valor diametralmente opuesto)
+# FUNCIÓN IV: intercambia
+# ---------------------
+# Función que cambia un valor de la matriz elegido por el usuario a través de los índices
+# de fila y columna del elemento a cambiar por su diametralmente opuesto.
+
+# ARGUMENTOS Y REGISTROS DE RETORNO
+# ---------------------
+# structMat* mat	= $a0
+# int indF		= $a1
+# int indC		= $a2
+
+# TABLA DE REGISTROS
+# ---------------------
+# int numFil			= $t0
+# int numCol			= $t1
+# Dirección de float* e1	= $t2
+# numFil - indF - 1		= $t3
+# numCol - indC - 1		= $t4
+# Dirección de float* e2	= $t5
+
 intercambia:
+	# void intercambia(structMat* mat, int indF, int indC) {
+	# int numFil = mat->nFil;
+	lw	$t0, nFil($a0)
+	# int numCol = mat->nCol;
+	lw	$t1, nCol($a0)
+
+	# Desplazamos $a0 8 espacios para acceder directamente a los elementos:
+	addi	$a0, elementos
+
+	# indF * numCol
+	mul	$t2, $a1, $t1
+	# (indF * numCol) + indC
+	addu	$t2, $t2, $a2
+	# (indF * numCol + indC) * sizeF
+	mul	$t2, $t2, sizeF
+	# Dirección de float* e1 = &datos[indF * numCol + indC];
+	addu	$t2, $t2, $a0
+	
+	# numFil - indF
+	subu	$t3, $t0, $a1
+	# (numFil - indF) - 1
+	addi	$t3, $t3, -1
+
+	# numCol - indC
+	subu	$t4, $t1, $a2
+	# (numCol - indC) - 1
+	addi	$t4, $t4, -1
+
+	# (numFil - indF - 1) * numCol
+	mul	$t5, $t3, $t1
+	# (numFil - indF - 1) * numCol + (numCol - indC - 1)
+	addu	$t5, $t5, $t4
+	# [(numFil - indF - 1) * numCol + (numCol - indC - 1)] * sizeF
+	mul	$t5, $t5, sizeF
+	# Dirección de float* e2 = &datos[(numFil - indF - 1) * numCol + (numCol - indC - 1)];
+	addu	$t5, $t5, $a0
+
+	# Reservamos espacio en la pila:
+	addi	$sp, $sp, -4
+	# Guardamos 'return address'
+	sw	$ra, 0($sp)
+
+	# Cargamos 'e1' en $a0 para usarlo en 'swap':
+	move	$a0, $t2
+	# Cargamos 'e2' en $a1 para usarlo en 'swap':
+	move	$a1, $t5
+
+	# swap(e1, e2);
+	jal	swap
+	
+	# Restauramos valores y liberamos espacio en la pila:
+	lw	$ra, 0($sp)
+	addi	$sp, $sp, 4
+	
+	# }
 	jr	$ra
 intercambia_fin:
 
 # FUNCIÓN V: find_min (encontrar mínimo)
 # ---------------------
-# 
+# Función que busca y guarda el mínimo de la matriz actual de trabajo, así como los índices
+# de fila y columna que designan la posición de dicho mínimo.
+
+# ARGUMENTOS Y REGISTROS DE RETORNO
+# ---------------------
+# structMat* mat		= $a0
+
+# TABLA DE REGISTROS
+# ---------------------
+# numFil			= $t0
+# numCol			= $t1
+# int fmin			= $t2
+# int cmin			= $t3
+# int f				= $t4
+# int c				= $t5
+# Dirección de datos[]		= $t6
+# float min			= $f7
+# float valor			= $f8
+
 find_min:
+	# std::tuple<float, int, int> find_min(structMat* mat) {
+	# int numFil = mat->nFil;
+	lw	$t0, nFil($a0)
+	# int numCol = mat->nCol;
+	lw	$t1, nCol($a0)
+	# float min = infinito;
+	lwc1	$f7, infinito
+	# int fmin = -1;
+	li	$t2, -1
+	# int cmin = -1;
+	li	$t3, -1
+	
+	# Excepción matriz 0x0:
+	beqz	$t0, exception_min
+	# int f = 0
+	move	$t4, $zero
+	# for (int f = 0; f < numFil; f++) {
+	bfor_min_f:
+		# int c = 0
+		move	$t5, $zero
+		# for (int c = 0; c < numCol; c++) {
+		bfor_min_c:
+			# f * numCol
+			mul	$t6, $t4, $t1
+			# (f * numCol) + c
+			addu	$t6, $t6, $t5
+			# (f * numCol + c) * sizeF
+			mul	$t6, $t6, sizeF
+			# Dirección de datos[f * nCol + c]
+			addu	$t6, $t6, $a0
+			# float valor = datos[f * numCol + c];
+			lwc1	$f8, elementos($t6)
+
+			# Comprobamos 'valor < min' para actualizar el mínimo:
+			c.lt.s	$f8, $f7
+			# Si no es menor, no se actualiza:
+			bc1f	preserve_min
+			
+			# if (valor < min) {
+			# 	min = valor;
+			mov.s	$f7, $f8
+			# 	fmin = f;
+			move	$t2, $t4
+			# 	cmin = c;
+			move	$t3, $t5
+			# }
+			
+			preserve_min:
+			# c++
+			addi	$t5, $t5, 1
+			# Comprobamos 'c < numCol' para continuar en el bucle 'for' (bfor_print_c).
+			blt	$t5, $t1, bfor_min_c
+		# }
+		# f++
+		addi	$t4, $t4, 1
+		# Comprobamos 'f < nFil' para continuar en el bucle 'for' (bfor_print_f).
+		blt	$t4, $t0, bfor_min_f
+	# }
+
+	exception_min:
+	# return {min, fmin, cmin};
+	# min $f7 --> $f0
+	mov.s	$f0, $f7
+	# fmin $t2 --> $v0
+	move	$v0, $t2
+	# cmin $t3 --> $v1
+	move	$v1, $t3
+
+	# }
 	jr	$ra
 find_min_fin:
 
 # FUNCIÓN MAIN
 # ---------------------
-# int opcion	= $t0
+# Matriz de trabajo	= $s0
 
 main:
 # El apartado 'prelude' sirve exclusivamente para cargar 'mat1' como la primera matriz de trabajo, y no
@@ -414,16 +689,15 @@ main:
 		
 		# structMat* matTrabajo = &mat1; 
 		la	$s0, mat1
-		# int nFil = &mat1->nFil;
-		lw	$s1, nFil($s0)
-		# int nCol = &mat1->nCol;
-		lw	$s2, nCol($s0)
-
+		
 	# while (true) {
 	main_menu:
+		# Cargamos matT en $a0 para usarla en print_mat:
+		move	$a0, $s0
+
 		# print_mat(matTrabajo);
 		jal	print_mat
-		
+
 		# std::cout << "(0) Terminar el programa\n"
                 #	       "(1) Cambiar la matriz de trabajo\n"
                 # 	       "(3) Cambiar el valor de un elemento\n"
@@ -438,19 +712,18 @@ main:
     		# std::cin >> opcion;
 		li	$v0, 5
 		syscall
-		move 	$t0, $v0
 		
 		# switch (opcion) {
 		# case 0:
-		beqz	$t0, opcion_0
+		beqz	$v0, opcion_0
 		# case 1:
-		beq	$t0, 1, opcion_1
+		beq	$v0, 1, opcion_1
 		# case 3:
-		beq	$t0, 3, opcion_3
+		beq	$v0, 3, opcion_3
 		# case 4:
-		beq 	$t0, 4, opcion_4
+		beq 	$v0, 4, opcion_4
 		# case 7:
-		beq	$t0, 7, opcion_7
+		beq	$v0, 7, opcion_7
 		# default:
 		# std::cout << "Error: opcion incorrecta\n";
 		li	$v0, 4
@@ -472,11 +745,7 @@ main:
 			li	$v0, 10
 			syscall
 			# }
-		
-		# OPCIÓN 1
-		# ---------------------
-		# matT		= $t0
-		
+
 		opcion_1:
 			# case 1:
 			# std::cout << "\nElije la matriz de trabajo (1..6): ";
@@ -488,21 +757,20 @@ main:
         		# std::cin >> matT;
 			li	$v0, 5
 			syscall
-			move	$t0, $v0
 			
 			# switch (matT) {
 			# case 1:
-			beq	$t0, 1, matT_1
+			beq	$v0, 1, matT_1
 			# case 2:
-			beq	$t0, 2, matT_2
+			beq	$v0, 2, matT_2
 			# case 3:
-			beq 	$t0, 3, matT_3
+			beq 	$v0, 3, matT_3
 			# case 4:
-			beq	$t0, 4, matT_4
+			beq	$v0, 4, matT_4
 			# case 5:
-			beq	$t0, 5, matT_5
+			beq	$v0, 5, matT_5
 			# case 6:
-			beq	$t0, 6, matT_6
+			beq	$v0, 6, matT_6
 			# default:
 			# std::cout << "Numero de matriz de trabajo incorrecto\n";
 			li	$v0, 4
@@ -516,10 +784,6 @@ main:
 				# case 1:
 				# structMat* matTrabajo = &mat1; 
 				la	$s0, mat1
-				# int nFil = &mat1->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat1->nCol;
-				lw	$s2, nCol($s0)
 
 				j	main_menu
 			
@@ -527,10 +791,6 @@ main:
 				# case 2:
 				# structMat* matTrabajo = &mat2; 
 				la	$s0, mat2
-				# int nFil = &mat2->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat2->nCol;
-				lw	$s2, nCol($s0)
 
 				j main_menu
 
@@ -538,21 +798,13 @@ main:
 				# case 3:
 				# structMat* matTrabajo = &mat3; 
 				la	$s0, mat3
-				# int nFil = &mat3->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat3->nCol;
-				lw	$s2, nCol($s0)
-
+				
 				j	main_menu
 			
 			matT_4:
 				# case 4:
 				# structMat* matTrabajo = &mat4; 
 				la	$s0, mat4
-				# int nFil = &mat4->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat4->nCol;
-				lw	$s2, nCol($s0)
 
 				j	main_menu
 			
@@ -560,10 +812,6 @@ main:
 				# case 5:
 				# structMat* matTrabajo = &mat5; 
 				la	$s0, mat5
-				# int nFil = &mat5->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat5->nCol;
-				lw	$s2, nCol($s0)
 
 				j	main_menu
 
@@ -571,36 +819,34 @@ main:
 				# case 6:
 				# structMat* matTrabajo = &mat6; 
 				la	$s0, mat6
-				# int nFil = &mat6->nFil;
-				lw	$s1, nFil($s0)
-				# int nCol = &mat6->nCol;
-				lw	$s2, nCol($s0)
 
 				j	main_menu
 
-		# OPCIÓN 3 Y 4
+		# OPCIÓN 3
 		# ---------------------
-		# indFil	= $t0
-		# indCol	= $t1
+		# indFil	= $s1
+		# indCol	= $s2
+		# valor		= $f12
 
-		opcion_3_4:
+		opcion_3:
 			# case 3:
-			# case 4:
 			# std::cout << "\nIndice de fila: ";
 			li	$v0, 4
 			la	$a0, str_indFila
 			syscall
-
+			
 			# int indFil;
-        		# std::cin >> indFil;
+			# std::cin >> indFil;
 			li	$v0, 5
 			syscall
-			move	$t0, $v0
-			
+			move	$s1, $v0
+
 			# if (indFil < 0)
-			bltz	$t0, indFil_err
+			bltz	$v0, indFil_err
+			# $t0 = nFil
+			lw	$t0, nFil($s0)
 			# if (indFil >= matTrabajo->nFil)
-			bge	$t0, $s1, indFil_err
+			bge	$v0, $t0, indFil_err
 			
 			# std::cout << "Indice de columna: ";
 			li	$v0, 4
@@ -611,64 +857,168 @@ main:
         		# std::cin >> indCol;
 			li	$v0, 5
 			syscall
-			move	$t1, $v0
+			move	$s2, $v0
 
 			# if ((indCol < 0)
-			bltz	$t1, indCol_err
+			bltz	$v0, indCol_err
+			# $t0 = nCol
+			lw	$t0, nCol($s0)
 			# if (indCol >= matTrabajo->nCol)
-			bge	$t1, $s2, indCol_err
+			bge	$v0, $t0, indCol_err
 
-			jr	$ra
+			# std::cout << "Nuevo valor para el elemento: ";
+			li	$v0, 4
+			la	$a0, str_nuevoValor
+			syscall
 			
-			indFil_err:
-				# if ((indFil < 0) || (indFil >= matTrabajo->nFil)) {
-				# std::cerr << "Error: dimension incorrecta.  Numero de fila incorrecto\n";
-				li	$v0, 4
-				la	$a0, str_errorFil
-				syscall
-				# }
-				jr	$ra
+			# float valor;
+			# std::cin >> valor;
+			li	$v0, 6
+			syscall
+			# 'valor' ya se encuentra en un registro de argumento.
+			mov.s	$f12, $f0
+
+			# Cargamos los valores en argumentos para emplearlos en change_elto:
+			# matTrabajo $s0 --> $a0
+			move	$a0, $s0
+			# indFil $s1 --> $a1
+			move	$a1, $s1
+			# indCol $s2 --> $a2
+			move	$a2, $s2
+
+			# change_elto(matTrabajo, indFil, indCol, valor);
+			jal	change_elto
+
+			# break;
+			j	main_menu
+
+		# OPCIÓN 4
+		# ---------------------
+		# indFil	= $s1
+		# indCol	= $s2
+
+		opcion_4:
+			# case 4:
+			# std::cout << "\nIndice de fila: ";
+			li	$v0, 4
+			la	$a0, str_indFila
+			syscall
+
+			# int indFil;
+        		# std::cin >> indFil;
+			li	$v0, 5
+			syscall
+			move	$s1, $v0
 			
-			indCol_err:
-				# if ((indCol < 0) || (indCol >= matTrabajo->nCol)) {
-				# std::cerr << "Error: dimension incorrecta.  Numero de columna incorrecto\n";
-				li	$v0, 4
-				la	$a0, str_errorCol
-				syscall
-				# }
-				jr	$ra
-
-			opcion_3:
-				# case 3:
-				jal	opcion_3_4
-
-				# [...]
-				# std::cout << "Nuevo valor para el elemento: ";
-				li	$v0, 4
-				la	$a0, str_nuevoValor
-				syscall
-
-				# float valor;
-      	  			# std::cin >> valor;
-				li	$v0, 6
-				syscall
-				mov.s	$f20, $f20
-
-				# change_elto(matTrabajo, indFil, indCol, valor);
-				jal	change_elto
-
-				# break;
-				j	main_menu
+			# if (indFil < 0)
+			bltz	$v0, indFil_err
+			# $t0 = nFil
+			lw	$t0, nFil($s0)
+			# if (indFil >= matTrabajo->nFil)
+			bge	$v0, $t0, indFil_err
 			
-			opcion_4:
-				# case 4:
-				jal	opcion_3_4
+			# std::cout << "Indice de columna: ";
+			li	$v0, 4
+			la	$a0, str_indCol
+			syscall
 
-				# [...]
-				# intercambia(matTrabajo, indFil, indCol);
-				jal	intercambia
+			# int indCol;
+        		# std::cin >> indCol;
+			li	$v0, 5
+			syscall
+			# Cargamos indCol directamente en $a2	
+			move	$a2, $v0
 
-				# break;
-				j	main_menu
+			# if ((indCol < 0)
+			bltz	$v0, indCol_err
+			# $t0 = nCol
+			lw	$t0, nCol($s0)
+			# if (indCol >= matTrabajo->nCol)
+			bge	$v0, $t0, indCol_err
+
+			# Cargamos los valores en argumentos para emplearlos en change_elto:
+			# matTrabajo $s0 --> $a0
+			move	$a0, $s0
+			# indFil $s1 --> $a1
+			move	$a1, $s1
+
+			# intercambia(matTrabajo, indFil, indCol);
+			jal	intercambia
+
+			# break;
+			j	main_menu
+			
+		indFil_err:
+			# if ((indFil < 0) || (indFil >= matTrabajo->nFil)) {
+			# std::cerr << "Error: dimension incorrecta.  Numero de fila incorrecto\n";
+			li	$v0, 4
+			la	$a0, str_errorFil
+			syscall
+			
+			# }
+			j	main_menu
+			
+		indCol_err:
+			# if ((indCol < 0) || (indCol >= matTrabajo->nCol)) {
+			# std::cerr << "Error: dimension incorrecta.  Numero de columna incorrecto\n";
+			li	$v0, 4
+			la	$a0, str_errorCol
+			syscall
+			
+			# }
+			j	main_menu
+			
+		# OPCIÓN 7
+		# ---------------------
+		# int filaMin		= $s1
+		# int columnaMin	= $s2
+		# float valorMin	= $f20
+
 		opcion_7:
-		
+			# case 7:
+			# Cargamos matT en $a0 para usarla en find_min:
+			move	$a0, $s0
+
+			# std::tie(valorMin, filaMin, columnaMin) = find_min(matTrabajo);
+			jal	find_min
+			
+			#Guardamos los valores de retorno en registros salvados para que no se sobrescriban:
+			# filaMin $v0 --> $s1
+			move	$s1, $v0
+			# columnaMin $v1 --> $s2
+			move	$s2, $v1
+			# valorMin $f0 --> $f20
+			mov.s	$f20, $f0
+
+			# std::cout << "\nEl valor minimo esta en ("
+			li	$v0, 4
+			la	$a0, str_valMin
+			syscall
+
+			# << filaMin
+			li	$v0, 1
+			move	$a0, $s1
+			syscall
+
+			# << ','
+			li	$v0, 11
+			la	$a0, 44 
+			syscall
+
+			# << columnaMin
+			li	$v0, 1
+			move	$a0, $s2
+			syscall
+
+			# << ") con valor "
+			li	$v0, 4
+			la	$a0, str_conValor
+			syscall
+
+			# << valorMin;
+			li	$v0, 2
+			mov.s	$f12, $f20
+			syscall
+
+			# break;
+			j	main_menu
