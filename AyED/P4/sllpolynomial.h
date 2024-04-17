@@ -130,7 +130,7 @@ void SllPolynomial::Sum(const SllPolynomial& sllpol, SllPolynomial& sllpolsum,
   vector_t<double> list;
   list.resize(12);
   while (aux1 != NULL) {
-    for (int i = 0; i < list.get_size(); i++) {
+    for (int i = 0; i < list.get_size(); ++i) {
       if (aux1->get_data().get_inx() == i) {
         list.at(i) = aux1->get_data().get_val();
       }
@@ -138,7 +138,7 @@ void SllPolynomial::Sum(const SllPolynomial& sllpol, SllPolynomial& sllpolsum,
     aux1 = aux1->get_next();
   }
   while (aux2 != NULL) {
-    for (int i = 0; i < list.get_size(); i++) {
+    for (int i = 0; i < list.get_size(); ++i) {
       if (aux2->get_data().get_inx() == i) {
         list.at(i) += aux2->get_data().get_val();
       }

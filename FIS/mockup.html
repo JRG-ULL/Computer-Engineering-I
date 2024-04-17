@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mockup gestor bibliotecario</title>
+        <link rel="stylesheet" href="style.css" />
+        <!-- Unicons -->
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+</head>
+
+<body>
+        <!-- Header -->
+        <header class="header">
+                <nav class="nav">
+                        <a href="#" class="nav_logo">ULLteca</a>
+                        <ul class="nav_items">
+                                <li class="nav_item">
+                                        <a href="#" class="nav_link">Inicio</a>
+                                        <a href="#" class="nav_link">Buscar...</a>
+                                        <a href="#" class="nav_link">Préstamos</a>
+                                        <a href="#" class="nav_link">Contacto</a>
+                                </li>
+                        </ul>
+
+                        <button class="button">Iniciar sesión</button>
+                </nav>
+        </header>
+
+        <!-- Home -->
+        <section class="home">
+                <div class="form_container">
+                        <i class="uil uil-times form_close"></i>
+                        <!-- Login form -->
+                        <div class="form login_form">
+                                <form action="#">
+                                        <h2>¡Bienvenid@!</h2>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="Usuario" required />
+                                                <i class="uil uil-user"></i>
+                                        </div>
+                                        <div class="input_box">
+                                                <input type="password" placeholder="Contraseña" required />
+                                                <i class="uil uil-lock password"></i>
+                                                <i class="uil uil-eye-slash pw_hide"></i>
+                                        </div>
+                                        <div class="option_field">
+                                                <span class="checkbox">
+                                                        <input type="checkbox" id="check">
+                                                        <label for="check">Recuérdame</label>
+                                                </span>
+                                                <a href="#" class="forgot_pw">¿Has olvidado tu contraseña?</a>
+                                        </div>
+                                        <button class="button">Iniciar sesión</button>
+
+                                        <div class="login_signup">
+                                                ¿Todavía no tienes cuenta? <a href="#" id="signup">Registrarse</a>
+                                        </div>
+                                </form>
+                        </div>
+
+                        <!-- Signup form -->
+                        <div class="form signup_form">
+                                <form action="#">
+                                        <h2>Registrarse</h2>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="Nombre completo" required />
+                                                <i class="uil uil-user"></i>
+                                        </div>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="DNI/NIF" required />
+                                                <i class="uil uil-lock password"></i>
+                                        </div>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="Correo electrónico" required />
+                                                <i class="uil uil-lock password"></i>
+                                        </div>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="Dirección" required />
+                                                <i class="uil uil-lock password"></i>
+                                        </div>
+                                        <div class="option_field">
+                                                <span class="checkbox">
+                                                        <input type="checkbox" id="check">
+                                                        <label for="check">Recuérdame</label>
+                                                </span>
+                                                <a href="#" class="forgot_pw">¿Has olvidado tu contraseña?</a>
+                                        </div>
+                                        <button class="button">Iniciar sesión</button>
+
+                                        <div class="login_signup">
+                                                ¿Todavía no tienes cuenta? <a href="#" id="signup">Registrarse</a>
+                                        </div>
+                                </form>
+                        </div>
+
+                </div>
+        </section>
+</body>
+
+</html>
