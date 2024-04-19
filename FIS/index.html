@@ -33,6 +33,7 @@
         <section class="home">
                 <div class="form_container">
                         <i class="uil uil-times form_close"></i>
+
                         <!-- Login form -->
                         <div class="form login_form">
                                 <form action="#">
@@ -51,7 +52,10 @@
                                                         <input type="checkbox" id="check">
                                                         <label for="check">Recuérdame</label>
                                                 </span>
-                                                <a href="#" class="forgot_pw">¿Has olvidado tu contraseña?</a>
+                                                <div class="forgot_pw">
+                                                        <a href="#" id="forgotpw">¿Has olvidado tu
+                                                                contraseña?</a>
+                                                </div>
                                         </div>
                                         <button class="button">Iniciar sesión</button>
 
@@ -71,7 +75,7 @@
                                         </div>
                                         <div class="input_box">
                                                 <input type="text" placeholder="DNI/NIF" required />
-                                                <i class="uil uil-file"></i>
+                                                <i class="uil uil-postcard"></i>
                                         </div>
                                         <div class="input_box">
                                                 <input type="text" placeholder="Correo electrónico" required />
@@ -83,7 +87,7 @@
                                         </div>
                                         <div class="input_box">
                                                 <input type="text" placeholder="Dirección" />
-                                                <i class="uil "></i>
+                                                <i class="uil uil-location-point"></i>
                                         </div>
                                         <div class="input_box">
                                                 <input type="password" placeholder="Establecer contraseña" required />
@@ -100,6 +104,23 @@
                                         <div class="login_signup">
                                                 ¿Ya tienes cuenta? <a href="#" id="login">Iniciar sesión</a>
                                         </div>
+                                </form>
+                        </div>
+
+                        <!-- Forgot password -->
+                        <div class="form forgot_password">
+                                <form action="#">
+                                        <h2>¿Has olvidado tu contraseña?</h2>
+                                        <p>¡Tranquil@! Olvidar la contraseña nos pasa a todos.</p>
+                                        <p>Para recuperarla, <b>introduce el usuario o correo electrónico asociado a tu
+                                                        cuenta.</b> En breve recibirás un mensaje con las instrucciones
+                                                para restablecerla.</p>
+                                        <div class="input_box">
+                                                <input type="text" placeholder="Usuario o correo electrónico"
+                                                        required />
+                                                <i class="uil uil-user"></i>
+                                        </div>
+                                        <button class="button">Restablecer contraseña</button>
                                 </form>
                         </div>
 

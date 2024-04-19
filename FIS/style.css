@@ -123,11 +123,27 @@ a {
 .form_container.active .signup_form {
         display: block;
 }
+
 .form_container.active .login_form {
         display: none;
 }
 
 .signup_form {
+        display: none;
+}
+
+.forgot_password {
+        display: none;
+}
+
+.form_container.password .forgot_password {
+        display: block;
+}
+
+.form_container.password .login_form {
+        display: none;
+}
+.form_container.password .signup_form {
         display: none;
 }
 
@@ -145,6 +161,12 @@ a {
         font-size: 22px;
         color: black;
         text-align: center;
+}
+
+.form_container p {
+        font-size: 12px;
+        text-align: center;
+        padding: 5px;
 }
 
 .input_box {
@@ -177,13 +199,26 @@ a {
 }
 
 .input_box i.uil-user,
-.input_box i.password {
+.input_box i.password,
+.input_box i.uil-envelope-alt,
+.input_box i.uil-phone,
+.input_box i.uil-postcard,
+.input_box i.uil-location-point {
         left: 0;
         color: #707070;
 }
 
+.input_box i.uil-eye-slash,
+.input_box i.uil-eye {
+        color: #707070;
+}
+
 .input_box input:focus~i.uil-user,
-.input_box input:focus~i.password {
+.input_box input:focus~i.password,
+.input_box input:focus~i.uil-phone,
+.input_box input:focus~i.uil-envelope-alt,
+.input_box input:focus~i.uil-postcard,
+.input_box input:focus~i.uil-location-point {
         color: #591290;
 }
 
