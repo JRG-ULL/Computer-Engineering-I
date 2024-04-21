@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+        font-family: "Montserrat";
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+}
+
+ul {
+        list-style: none;
+}
+
+a {
+        text-decoration: none;
+}
+
+body {
+        margin: 0px;
+        padding: 0px;
+        font-family: "Montserrat";
+}
+
+.navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+        padding: 0 20px;
+        width: 100%;
+        background: #591290ee;
+        z-index: 100;
+        margin: auto;
+}
+
+.menu {
+        display: flex;
+}
+
+.menu li a {
+        padding: 3px 10px;
+        margin: 0px, 15px;
+        color: white;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+}
+
+.logo {
+        font-size: 1.4rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: white;
+}
+
+.button {
+        color: white;
+}
+
+.menu li a:hover,
+.menu .active {
+        color: #d0a8f0;
+        transition: all ease 0.3s;
+}
+
+.button {
+        padding: 6px 24px;
+        border: 2px solid white;
+        background: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+}
+
+.button:active {
+        transform: scale(0.98);
+}
+
+/* Search banner */
+#search-banner {
+        max-width: 1250px;
+        height: 500px;
+        border-radius: 30px;
+        background-color: #f0ecf7;
+        margin: 10px auto;
+        position: relative;
+        overflow: hidden;
+        background-image: url(search_bg.png);
+        background-repeat: no-repeat;
+        background-size: 450px;
+        background-position: bottom right;
+        display: flex;
+        align-items: center;
+}
+
+.search_bg2 {
+        position: absolute;
+        left: -40px;
+        top: -100px;
+        width: 300px;
+        height: 300px;
+        object-fit: contain;
+        object-position: center;
+}
+
+.search-banner-text {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        margin-left: 70px;
+        position: relative;
+}
+
+.search-banner-text h1 {
+        font-size: 3rem;
+        line-height: 55px;
+        color: #202020;
+}
+
+.search-banner-text strong {
+        color: #591290;
+        font-size: 1.4rem;
+        margin-top: 4px;
+}
+
+.search-box {
+        background-color: white;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        margin-top: 25px;
+        padding: 0px 5px 0px 20px;
+        border-radius: 30px;
+}
+
+.search-box i {
+        font-size: 1.3rem;
+        color: #3b3b3b;
+        margin: 0px 10px;
+}
+
+.search-box .search-input {
+        height: 40px;
+        border: none;
+        width: 100%;
+        padding: 0px 10px;
+}
+
+.search-box .search-btn {
+        width: 220px;
+        height: 40px;
+        border-radius: 30px;
+        background-color: #591290;
+        border: none;
+        color: white;
+        outline: none;
+        transition: all ease 0.3s;
+}
+
+.search-box .search-btn:hover {
+        background-color: #9258be;
+        transition: all ease 0.3s;
+}
