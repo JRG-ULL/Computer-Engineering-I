@@ -7,17 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Search</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
+  
   <!-- Unicons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 
 <body>
+  
   <!-- Navigation -->
   <nav class="navigation">
+    
     <!-- Logo -->
     <a href="#" class="logo">
       ULLteca
     </a>
+    
     <!-- Menu -->
     <ul class="menu">
       <li><a href="#">Inicio</a></li>
@@ -25,6 +29,7 @@
       <li><a href="#">Préstamos</a></li>
       <li><a href="#">Contacto</a></li>
     </ul>
+    
     <!-- Right nav (Login button) -->
     <button class="button" id="form-open">Iniciar sesión</button>
   </nav>
@@ -32,23 +37,64 @@
 
   <!-- Search banner -->
   <section id="search-banner">
+    
     <!-- Background -->
     <img src="search_bg2.png" class="search_bg2" alt="search_bg2">
+    
     <!-- Text -->
     <class class="search-banner-text">
       <h1>¡Encuentra tus recursos aquí!</h1>
-      <strong>En físico y en digital</strong>
+      <strong>Consíguelos en físico o en digital</strong>
+      
       <!-- Searchbox -->
       <form action="" class="search-box">
+        
         <!-- Icon -->
         <i class="uil uil-search"></i>
+        
         <!-- Input -->
         <input type="text" class="search-input" placeholder="Nombre o código IBAN del recurso" name="search" required>
+        
         <!-- Btn -->
-        <input type="submit" class="search-btn" value="Buscar"
+        <input type="submit" class="search-btn" value="Buscar">
       </form>
     </class>
   </section>
+ 
+  <!-- Categories -->
+      <section id="category">
+        
+        <!-- Heading -->
+        <div class="category-heding">
+          <h2>Categorías</h2>
+        </div>
+
+        <!-- Box containers -->
+        <div class="category-container">
+
+          <!-- Box -->
+          <a href="#" class="category-box">
+            <img src="book.png" alt="books">
+            <span>Libros</span>
+          </a>
+          <a href="#" class="category-box">
+            <img src="mag.png" alt="mags">
+            <span>Revistas</span>
+          </a>
+          <a href="#" class="category-box">
+            <img src="articles-icon.webp" alt="articles">
+            <span>Artículos</span>
+          </a>
+          <a href="#" class="category-box">
+            <img src="video.png" alt="videos">
+            <span>Audiovisuales</span>
+          </a>
+          <a href="#" class="category-box">
+            <img src="printer.png" alt="services">
+            <span>Servicios</span>
+          </a>
+        </div>
+      </section>
 </body>
 
 </html>
