@@ -16,26 +16,18 @@
 
 #include <iostream>
 
-int main()
-{
+int main() {
   int num1;
   int num2;
   int num3;
-  while (std::cin >> num1 >> num2 >> num3)
-  {
-    if (num1 >= num2 && num1 >= num3)
-    {
+  while (std::cin >> num1 >> num2 >> num3) {
+    if (num1 >= num2 && num1 >= num3) {
       std::cout << num1 << std::endl;
-    }
-    else if (num2 >= num1 && num2 >= num3)
-    {
+    } else if (num2 >= num1 && num2 >= num3) {
       std::cout << num2 << std::endl;
-    }
-    else if (num3 >= num1 && num3 >= num2)
-    {
+    } else if (num3 >= num1 && num3 >= num2) {
       std::cout << num3 << std::endl;
     }
   }
   return 0;
 }
-

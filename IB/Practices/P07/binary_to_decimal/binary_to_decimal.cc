@@ -17,26 +17,32 @@
 
 #include <iostream>
 
-
 // Function that prints the program's purpose on the screen.
 void PrintProgramPurpose() {
-  std::cout << "\nThis program takes a binary number as its input and prints out\n" <<
-               "its decimal representation on screen. The program will only process\n" <<
-               "a single number, so vectors, arrays or strings are not allowed as\n" <<
-               "input. Were the user to give a non-binary number, the program will\n" <<
-               "exit displaying an error message.\n\nPlease, introduce a binary number: ";
+  std::cout
+      << "\nThis program takes a binary number as its input and prints out\n"
+      << "its decimal representation on screen. The program will only process\n"
+      << "a single number, so vectors, arrays or strings are not allowed as\n"
+      << "input. Were the user to give a non-binary number, the program will\n"
+      << "exit displaying an error message.\n\nPlease, introduce a binary "
+         "number: ";
 }
 
-// Function that checks if the program has the correct number of parameters it needs to properly function.
-bool CheckCorrectParameters(const int argc, char *argv[], const int kCorrectNumber) {
+// Function that checks if the program has the correct number of parameters it
+// needs to properly function.
+bool CheckCorrectParameters(const int argc, char* argv[],
+                            const int kCorrectNumber) {
   if (argc != kCorrectNumber) {
-    std::cout << "This program has been executed with the wrong number of parameters.\nThis program should be called " << argv[0] << "\n\n";
+    std::cout << "This program has been executed with the wrong number of "
+                 "parameters.\nThis program should be called "
+              << argv[0] << "\n\n";
     return false;
   }
   return true;
 }
 
-// Power function to properly calculate the decimal expression of the binary number input by the user.
+// Power function to properly calculate the decimal expression of the binary
+// number input by the user.
 int Power(const int& base, int exponential) {
   int power{1};
   if (exponential == 0) power = 1;
@@ -58,7 +64,8 @@ bool CheckBinary(int binary) {
   return true;
 }
 
-// Function that calculates the decimal expression of the binary number given by the user.
+// Function that calculates the decimal expression of the binary number given by
+// the user.
 int BinaryToDecimal(int binary) {
   int decimal{0};
   int exponential{0};
@@ -73,12 +80,14 @@ int BinaryToDecimal(int binary) {
 }
 
 // Function that prints out the resulting decimal expression.
-void PrintBinaryConversion(const int& binary) { 
-  std::cout << "The decimal representation of " << binary << " is " << BinaryToDecimal(binary) << ".\n\n";
+void PrintBinaryConversion(const int& binary) {
+  std::cout << "The decimal representation of " << binary << " is "
+            << BinaryToDecimal(binary) << ".\n\n";
 }
 
-// Main function, in which the user will input the binary number the program will use to print out the decimal representation of.
-int main(int argc, char *argv[]) {
+// Main function, in which the user will input the binary number the program
+// will use to print out the decimal representation of.
+int main(int argc, char* argv[]) {
   PrintProgramPurpose();
   if (!CheckCorrectParameters(argc, argv, 1)) {
     return 345;
@@ -90,4 +99,4 @@ int main(int argc, char *argv[]) {
   }
   PrintBinaryConversion(binary);
   return 0;
-} 
+}

@@ -67,9 +67,5 @@ int main() {
   std::cout << "Multiplicación de matrices A y B: " << std::endl;
   C.write();
 
-  D.transposed(A);
-  std::cout << "Matriz traspuesta A: " << std::endl;
-  D.write();
-
   return 0;
 }

@@ -71,39 +71,27 @@
  */
 
 #include <iostream>
-using namespace std;
 
-int main()
-{
+int main() {
   int hour;
   int min;
   int sec;
-  while (cin >> hour >> min >> sec)
-  {
-    sec++;
-    if (sec >= 60)
-    {
-      min++;
-      sec = 0;
-    }
-    if (min >= 60)
-    {
-      hour++;
-      min = 0;
-    }
-    if (hour >= 24)
-    {
-      hour = 0;
-    }
-    (hour < 10) ?
-      cout << "0" << hour << ":" :
-      cout << hour << ":";
-    (min < 10) ?
-      cout << "0" << min << ":" :
-      cout << min << ":";
-    (sec < 10) ?
-      cout << "0" << sec  <<endl :
-      cout << sec << endl;
+  std::cin >> hour >> min >> sec;
+  sec++;
+  if (sec >= 60) {
+    min++;
+    sec = 0;
   }
+  if (min >= 60) {
+    hour++;
+    min = 0;
+  }
+  if (hour >= 24) {
+    hour = 0;
+  }
+  (hour < 10) ? std::cout << "0" << hour << ":" : std::cout << hour << ":";
+  (min < 10) ? std::cout << "0" << min << ":" : std::cout << min << ":";
+  (sec < 10) ? std::cout << "0" << sec << std::endl
+             : std::cout << sec << std::endl;
   return 0;
 }

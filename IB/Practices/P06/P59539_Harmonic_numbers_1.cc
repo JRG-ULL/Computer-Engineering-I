@@ -13,21 +13,18 @@
  * @see     https://jutge.org/problems/P59539_en/
  */
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
-int main()
-{
+int main() {
   int limit;
   double harmonic;
-  while (std::cin >> limit)
-  {
-    for (int i = 1; i <= limit; i++)
-    {
+  while (std::cin >> limit) {
+    for (int i = 1; i <= limit; i++) {
       harmonic += 1.0000 / i;
     }
     std::cout << std::setprecision(4) << std::fixed << harmonic << std::endl;
     harmonic = 0;
   }
   return 0;
-} 
+}
